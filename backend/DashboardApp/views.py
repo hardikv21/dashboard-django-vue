@@ -5,7 +5,7 @@ from DashboardApp.models import Firm, User, Product, Transaction
 from DashboardApp.serializers import FirmSerializer, UserSerializer, ProductSerializer, TransactionSerializer
 
 
-class FirmViewSet(viewsets.ModelViewSet):
+class FirmViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Firm.objects.all()
     serializer_class = FirmSerializer
 
@@ -15,7 +15,7 @@ class FirmViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -25,7 +25,7 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class ProductViewSet(viewsets.ModelViewSet):
+class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
@@ -35,7 +35,7 @@ class ProductViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
 
-class TransactionViewSet(viewsets.ModelViewSet):
+class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
 

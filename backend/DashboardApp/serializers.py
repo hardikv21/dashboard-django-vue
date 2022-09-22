@@ -9,6 +9,8 @@ class FirmSerializer(serializers.ModelSerializer):
 
         
 class UserSerializer(serializers.ModelSerializer):
+    Firm = FirmSerializer(many=False)
+
     class Meta:
         model = User
         fields = '__all__'
@@ -21,6 +23,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class TransactionSerializer(serializers.ModelSerializer):
+    Product = ProductSerializer(many=False)
+    user = UserSerializer(many=False)
+
     class Meta:
         model = Transaction
         fields = '__all__'
