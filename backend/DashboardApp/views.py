@@ -1,5 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework.decorators import action
+from django.db.models import Prefetch
 
 from DashboardApp.models import Firm, User, Product, Transaction
 from DashboardApp.serializers import FirmSerializer, UserSerializer, ProductSerializer, TransactionSerializer
@@ -43,3 +45,15 @@ class TransactionViewSet(viewsets.ReadOnlyModelViewSet):
         transactions = Transaction.objects.all()
         serializer = TransactionSerializer(transactions, many=True)
         return Response(serializer.data)
+
+    @action(
+        detail=False,
+        methods=["get"],
+        url_name="user_transactions",
+        url_path="user_transactions/(?P<user_pk>[^/.]+)",
+    )
+    def userTransactions(self, request, user_pk=None):
+        transactions = Transaction.objects.filter(user=user_pk)
+        serializer = TransactionSerializer(transactions, many=True)
+        return Response(serializer.data)
+

@@ -8,7 +8,7 @@ class Firm(models.Model):
 class User(models.Model):
     name = models.CharField(max_length=100, unique=True)
     email = models.CharField(max_length=100)
-    Firm = models.ForeignKey(Firm, on_delete=models.CASCADE, related_name="userFirm")
+    Firm = models.ForeignKey(Firm, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
 
 

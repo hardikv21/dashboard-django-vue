@@ -53,3 +53,10 @@ class TransactionViewSetTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = TransactionSerializer(Transaction.objects.all(), many=True)
         self.assertEqual(response.data, data.data)
+
+    def test_userTransactions(self):     
+        url = reverse("transaction-user_transactions", args=(self.user1.id, ))
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = TransactionSerializer(Transaction.objects.filter(user=self.user1.id), many=True)
+        self.assertEqual(response.data, data.data)
